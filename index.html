@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Çağla Yurtseven - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .font-inter { font-family: 'Inter', sans-serif; }
+        .font-playfair { font-family: 'Playfair Display', serif; }
+        
+        .dark-gradient {
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+        }
+        
+        .gold-gradient {
+            background: linear-gradient(135deg, #d4af37 0%, #ffd700 50%, #b8860b 100%);
+        }
+        
+        .text-gold {
+            background: linear-gradient(135deg, #d4af37 0%, #ffd700 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .glass-dark {
+            background: rgba(15, 15, 35, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+        
+        .glass-light {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .elegant-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .elegant-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 32px 64px rgba(0, 0, 0, 0.3);
+        }
+        
+        .line-animation {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .line-animation::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+            animation: line-move 3s linear infinite;
+        }
+        
+        @keyframes line-move {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 0.8s ease;
+        }
+        
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .professional-card {
+            background: linear-gradient(145deg, #1a1a2e 0%, #16213e 100%);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        
+        .skill-meter {
+            background: linear-gradient(90deg, #d4af37 0%, #ffd700 50%, #b8860b 100%);
+            height: 4px;
+            border-radius: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .skill-meter::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        .executive-button {
+            background: linear-gradient(145deg, #d4af37, #b8860b);
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .executive-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .executive-button:hover::before {
+            left: 100%;
+        }
+        
+        .parallax-bg {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        .text-shadow-gold {
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+        }
+        
+        .border-gold {
+            border-color: #d4af37;
+        }
+        
+        .divider-gold {
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+            height: 1px;
+        }
+    </style>
+</head>
+<body class="font-inter dark-gradient text-white overflow-x-hidden">
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 transition-all duration-500" id="navbar">
+        <div class="max-w-7xl mx-auto px-8 py-6">
+            <div class="flex justify-between items-center">
+                <div class="font-sans text-2xl font-bold text-gold">Portfolyo</div>
+                <div class="hidden md:flex space-x-12">
+                    <a href="#home" class="text-gray-300 hover:text-gold transition-all duration-300 font-medium tracking-wide">Ana Sayfa</a>
+                    <a href="#about" class="text-gray-300 hover:text-gold transition-all duration-300 font-medium tracking-wide">Hakkımda</a>
+                    <a href="#expertise" class="text-gray-300 hover:text-gold transition-all duration-300 font-medium tracking-wide">Özgeçmiş</a>
+                    <a href="#portfolio" class="text-gray-300 hover:text-gold transition-all duration-300 font-medium tracking-wide">Projeler</a>
+                    <a href="#contact" class="text-gray-300 hover:text-gold transition-all duration-300 font-medium tracking-wide">İletişim</a>
+                </div>
+                <button class="md:hidden text-gray-300" onclick="toggleMobileMenu()">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+            <div id="mobileMenu" class="hidden md:hidden mt-6 glass-dark rounded-xl p-6">
+                <a href="#home" class="block py-3 text-gray-300 hover:text-gold transition-colors">Ana Sayfa</a>
+                <a href="#about" class="block py-3 text-gray-300 hover:text-gold transition-colors">Hakkımda</a>
+                <a href="#expertise" class="block py-3 text-gray-300 hover:text-gold transition-colors">Özgeçmiş</a>
+                <a href="#portfolio" class="block py-3 text-gray-300 hover:text-gold transition-colors">Projeler</a>
+                <a href="#contact" class="block py-3 text-gray-300 hover:text-gold transition-colors">İletişim</a>
+            </div>
+        </div>
+    </nav>
+<style>
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(var(--rotate)); }
+  50% { transform: translateY(-25px) rotate(calc(var(--rotate) + 8deg)); }
+}
+.floating {
+  animation: float 6s ease-in-out infinite;
+  will-change: transform;
+}
+</style>
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center relative">
+        <div class="absolute inset-0 bg-gradient-to-br from-black/50 to-transparent"></div>
+     
+        <!-- Geometric Background -->
+        <div class="absolute inset-0 overflow-hidden">
+        <div class="absolute top-20 left-20 w-64 h-64 border border-gold/20 rounded-3xl floating" style="--rotate:45deg;"></div>
+        <div class="absolute bottom-20 right-20 w-48 h-48 border border-gold/10 rounded-2xl floating" style="--rotate:12deg;"></div>
+        <div class="absolute top-1/2 left-1/4 w-32 h-32 border border-gold/15 rounded-xl floating" style="--rotate:-12deg;"></div>
+    </div>
+
+    <div class="relative z-10 px-8 max-w-7xl mx-auto flex flex-col md:flex-row items-center md:items-center justify-between gap-12">
+        
+        <!-- Sol Taraf: Fotoğraf -->
+        <div class="flex-shrink-0">
+            <img src="images/cvfoto.jpg" alt="Çağla Yurtseven" class="w-48 h-48 md:w-56 md:h-56 rounded-full border-4 border-gold shadow-lg">
+        </div>
+
+        <!-- Sağ Taraf: Yazı -->
+        <div class="text-center md:text-left">
+            <div class="w-1 h-16 gold-gradient mb-6 line-animation md:mx-0 mx-auto"></div>
+            <h1 class="font-sans text-5xl md:text-7xl font-extrabold mb-4 tracking-wide uppercase text-white">
+                <span class="block">ÇAĞLA</span>
+                <span class="block text-gold">YURTSEVEN</span>
+            </h1>
+            <p class="text-gray-300 text-lg mt-2">
+                İş Analisti • Veri Analizi • İş Zekası
+            </p>
+            <div class="flex flex-col sm:flex-row gap-6 mt-6 justify-center md:justify-start">
+                <!-- GitHub Button -->
+                <a href="https://github.com/caglayurtsvn" target="_blank" class="executive-button px-12 py-4 rounded-none font-semibold text-black tracking-wide hover:scale-105 transition-all duration-300">
+                    GitHub
+                </a>
+                <!-- LinkedIn Button -->
+                <a href="https://www.linkedin.com/in/%C3%A7a%C4%9Fla-yurtseven-/" target="_blank" class="glass-light px-12 py-4 rounded-none font-semibold border border-gold/30 hover:border-gold hover:bg-gold/10 transition-all duration-300">
+                    LinkedIn
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- About Section -->
+    <section id="about" class="py-32 relative">
+        <div class="max-w-7xl mx-auto px-8">
+            <div class="grid lg:grid-cols-2 gap-20 items-center">
+                <div class="fade-in-up">
+                    <div class="mb-12">
+                        <h2 class="font-playfair text-5xl md:text-6xl font-bold mb-6">
+                            <span class="text-gold">Ben</span><br>
+                            <span class="text-white">Kimim ?</span>
+                        </h2>
+                        <div class="divider-gold w-24 mb-8"></div>
+                    </div>
+                    
+                    <div class="space-y-8 text-lg text-gray-300 leading-relaxed">
+                        <p>
+                            <strong class="text-gold"> 👋 Merhaba! </strong> Ben Çağla Yurtseven. Eğitim sürecimde akademik projeler geliştirdim. Python, R, SQL ve Power BI gibi araçlara hakimim ve bu teknolojileri kullanarak çeşitli analiz ve görselleştirme projeleriyle kendimi geliştirdim. Bankacılık sektöründe edindiğim staj deneyimi sayesinde kurumsal iş süreçlerine dair önemli içgörüler kazandım. Problem çözme yeteneğim ve takım çalışmasına yatkınlığım ile dijital dünyada katma değer üretmeyi hedefliyorum.
+                        </p>
+                    </div>
+                    
+                    
+                </div>
+                
+                <div class="fade-in-up">
+                    <div class="professional-card p-12 elegant-hover">
+                        <div class="space-y-10">
+                            <div class="flex items-start space-x-6">
+                                <div class="w-12 h-12 gold-gradient flex items-center justify-center text-black font-bold text-xl">
+                                    01
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold text-white mb-3">Sürekli öğrenmeye açık</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-6">
+                                <div class="w-12 h-12 gold-gradient flex items-center justify-center text-black font-bold text-xl">
+                                    02
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold text-white mb-3">Yaratıcı çözümlerle değer katmak</h3>
+                                    
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-6">
+                                <div class="w-12 h-12 gold-gradient flex items-center justify-center text-black font-bold text-xl">
+                                    03
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold text-white mb-3">Dürüstlük, kalite ve işbirliği</h3>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Resume Section -->
+<section id="resume" class="py-20 relative bg-dark-gradient">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16 fade-in-up">
+            <h2 class="font-playfair text-4xl md:text-5xl font-bold mb-6">
+                <span class="text-white">Özgeçmiş</span>
+            </h2>
+            <div class="divider-gold w-24 mx-auto mb-6"></div>
+            <p class="text-lg text-gray-300 max-w-3xl mx-auto">
+                Akademik geçmişim, profesyonel deneyimlerim ve sosyal katkılarım
+            </p>
+        </div>
+
+        <!-- Summary -->
+        <div class="professional-card p-8 mb-12 fade-in-up">
+            <h3 class="text-2xl font-semibold text-white mb-6 flex items-center">
+                <span class="w-8 h-8 gold-gradient flex items-center justify-center text-black font-bold mr-4">📝</span>
+                Özgeçmiş Özeti
+            </h3>
+            <p class="text-gray-300 leading-relaxed">
+                Yönetim Bilişim Sistemleri alanındaki eğitimim ve çeşitli projelerde edindiğim deneyimlerle, veri analizi, 
+iş zekâsı ve dijital süreç yönetimi konularında etkili çözümler üretebiliyorum. Karmaşık verileri anlamlı ve 
+uygulanabilir içgörülere dönüştürme, süreçleri optimize etme ve karar alma mekanizmalarını güçlendirme 
+konusunda kendimi geliştirdim. Analitik düşünme becerim, problem çözme yeteneğim ve takım çalışmasına 
+yatkınlığım sayesinde, farklı sektörlerde katma değer sağlayacak projeler geliştirebilirim. 
+            </p>
+        </div>
+
+        <!-- Education & Certificates -->
+        <div class="grid md:grid-cols-2 gap-8 mb-12">
+            <!-- Education -->
+            <div class="professional-card p-8 fade-in-up">
+                <h3 class="text-2xl font-semibold text-white mb-6 flex items-center">
+                    <span class="w-8 h-8 gold-gradient flex items-center justify-center text-black font-bold mr-4">🎓</span>
+                    Eğitim Geçmişi
+                </h3>
+                
+                <div class="space-y-6">
+                    <div class="bg-gray-800 p-5 rounded-lg">
+                        <div class="flex justify-between items-start">
+                            <h4 class="text-lg font-bold text-white">Bilecik Şeyh Edebali Üniversitesi</h4>
+                            <span class="text-gold text-sm">2021 - 2025</span>
+                        </div>
+                        <p class="text-gold mb-2">Yönetim Bilişim Sistemleri - Lisans</p>
+                        <p class="text-gray-300 text-sm">GPA: 3.61/4.0 - Fakülte Üçüncüsü</p>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <!-- Certificates -->
+            <div class="professional-card p-8 fade-in-up">
+                <h3 class="text-2xl font-semibold text-white mb-6 flex items-center">
+                    <span class="w-8 h-8 gold-gradient flex items-center justify-center text-black font-bold mr-4">🏆</span>
+                    Sertifikalar
+                </h3>
+                
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-gray-800 p-4 rounded-lg">
+                        <p class="text-gold font-medium text-sm mb-1">Uygulamalı Microsoft Power BI</p>
+                        <p class="text-gray-300 text-xs">BTK Akademi, 2025</p>
+                    </div>
+                    <div class="bg-gray-800 p-4 rounded-lg">
+                        <p class="text-gold font-medium text-sm mb-1">Uygulamalarla SQL Öğreniyorum</p>
+                        <p class="text-gray-300 text-xs">BTK Akademi, 2024</p>
+                    </div>
+                    <div class="bg-gray-800 p-4 rounded-lg">
+                        <p class="text-gold font-medium text-sm mb-1">Sıfırdan İleri Seviye Python Programlama</p>
+                        <p class="text-gray-300 text-xs">BTK Akademi, 2023</p>
+                    </div>
+                    <div class="bg-gray-800 p-4 rounded-lg">
+                        <p class="text-gold font-medium text-sm mb-1">İleri Excel Geliştirme ve Uyum Eğitimi</p>
+                        <p class="text-gray-300 text-xs">Bursa Nilüfer Halk Eğitimi Merkezi, 2023</p>
+                    </div>
+                
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="professional-card p-8 fade-in-up mb-10">
+            <h3 class="text-2xl font-semibold text-white mb-6 flex items-center">
+                <span class="w-8 h-8 gold-gradient flex items-center justify-center text-black font-bold mr-4">⭐</span>
+                Yetenekler
+            </h3>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                <div class="bg-gray-800 p-4 rounded-lg text-center">
+                    <p class="text-gold font-medium">Python</p>
+                </div>
+                <div class="bg-gray-800 p-4 rounded-lg text-center">
+                    <p class="text-gold font-medium">R Programlama</p>
+                </div>
+                <div class="bg-gray-800 p-4 rounded-lg text-center">
+                    <p class="text-gold font-medium">Excel</p>
+                </div>
+                <div class="bg-gray-800 p-4 rounded-lg text-center">
+                    <p class="text-gold font-medium">Microsoft Office</p>
+                </div>
+                <div class="bg-gray-800 p-4 rounded-lg text-center">
+                    <p class="text-gold font-medium">SQL</p>
+                </div>
+                <div class="bg-gray-800 p-4 rounded-lg text-center">
+                    <p class="text-gold font-medium">Power BI</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Internships & Volunteering -->
+        <div class="grid md:grid-cols-2 gap-8">
+            <!-- Internships -->
+            <div class="professional-card p-8 fade-in-up">
+                <h3 class="text-2xl font-semibold text-white mb-6 flex items-center">
+                    <span class="w-8 h-8 gold-gradient flex items-center justify-center text-black font-bold mr-4">👔</span>
+                    Staj Deneyimleri
+                </h3>
+                
+                <div class="space-y-4">
+                    <div class="bg-gray-800 p-5 rounded-lg">
+                        <p class="text-gold font-medium mb-1">Locomar</p>
+                        <p class="text-gray-300 text-sm mb-2">İş Geliştirme Asistanı | 2024 Ekim - Aralık</p>
+                        <p class="text-gray-400 text-xs"> Locomarda İş Geliştirme Asistanı olarak LinkedIn üzerinden marka tanıtımı yaptım, kurumsal yazışmalar gerçekleştirdim ve haftalık görevleri zamanında tamamladım. Bu deneyim, iletişim ve organizasyon becerilerimi geliştirmeme katkı sağladı.</p>
+                    </div>
+                    
+                    <div class="bg-gray-800 p-5 rounded-lg">
+                        <p class="text-gold font-medium mb-1">DenizBank A.Ş</p>
+                        <p class="text-gray-300 text-sm mb-2">Şube Stajyeri | 2024 Ağustos - Eylül</p>
+                        <p class="text-gray-400 text-xs"> Kurum kültürü ve bankacılık işleyişi hakkında gözlem ve deneyim hakkında bilgiler edindim. Günlük mutabakat işlemlerinde destek sağlandı, fatura ve evrak kontrolleri gerçekleştirdim.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Volunteering -->
+            <div class="professional-card p-8 fade-in-up">
+                <h3 class="text-2xl font-semibold text-white mb-6 flex items-center">
+                    <span class="w-8 h-8 gold-gradient flex items-center justify-center text-black font-bold mr-4">❤️</span>
+                    Gönüllü Çalışmalar
+                </h3>
+                
+                <div class="space-y-4">
+                    <div class="bg-gray-800 p-5 rounded-lg">
+                        <p class="text-gold font-medium mb-1">Bilecik İl Milli Eğitim Müdürlüğü</p>
+                        <p class="text-gray-300 text-sm mb-2">Atölye Rehberi | 2024 Eylül</p>
+                        <p class="text-gray-400 text-xs">"Türkiye Yüzyılı Işığında Bilecik Bilim Şenliği" kapsamında, Sanal Gerçeklik (VR) standında gönüllü olarak görev aldım. Öğrencilere sanal gerçekliğin ne olduğunu, kullanım alanlarını anlattım ve interaktif VR deneyimi sundum.</p>
+                    </div>
+                    
+                    <div class="bg-gray-800 p-5 rounded-lg">
+                        <p class="text-gold font-medium mb-1">Bilecik Şeyh Edebali Üniversitesi Endüstri 4.0 ve Siber Güvenlik Kulübü</p>
+                        <p class="text-gray-300 text-sm mb-2">Sayman | 2023-2024 </p>
+                        
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Portfolio Section -->
+<section id="portfolio" class="py-32 relative">
+    <div class="max-w-7xl mx-auto px-8">
+        <div class="text-center mb-20 fade-in-up">
+            <h2 class="font-playfair text-5xl md:text-6xl font-bold mb-6">
+                <span class="text-white">Yaptığım</span> <span class="text-gold">Projeler</span>
+            </h2>
+            <div class="divider-gold w-24 mx-auto mb-8"></div>
+        </div>
+        
+        <div class="space-y-16">
+
+            <!-- Proje 1 -->
+            <div class="grid lg:grid-cols-2 gap-16 items-center fade-in-up">
+                <div class="order-2 lg:order-1">
+                    <div class="professional-card p-12 elegant-hover">
+                        <div class="mb-6">
+                            <div class="text-gold text-sm font-semibold tracking-wide uppercase mb-2">Power BI ile Analiz</div>
+                            <h3 class="font-playfair text-3xl font-bold text-white mb-4">Satış Analizi</h3>
+                        </div>
+                        <p class="text-gray-300 text-lg leading-relaxed mb-8">
+                            Bu proje, Kaggle üzerinden alınan Sample Superstore veri seti kullanılarak hazırlanmış interaktif bir Power BI satış analizi raporudur.
+                        </p>
+                        <button class="executive-button px-8 py-3 text-black font-semibold tracking-wide"
+                            onclick="openModal(
+                                'Satış Analizi',
+                                'Bu proje, Kaggle verileriyle hazırlanmış interaktif bir Power BI satış analizi raporudur.',
+                                ['images/powerbi2.jpg', 'images/powerbi3.jpg'],
+                                'Bu projede Sample Superstore veri seti kullanılarak bölge, kategori ve kârlılık bazlı analizler yapılmıştır. Power BI üzerinde DAX formülleriyle dinamik ölçümler oluşturulmuş, dilimleyicilerle kullanıcı etkileşimi artırılmıştır. Ayrıca satış trendleri, kâr marjı analizi ve tahminleme özellikleri eklenmiştir.'
+                            )">
+                            DETAYLARI GÖRÜNTÜLE
+                        </button>
+                    </div>
+                </div>
+                <div class="order-1 lg:order-2">
+                    <div class="professional-card p-8 elegant-hover">
+                        <div class="aspect-video bg-gradient-to-br from-gold/20 to-transparent rounded-lg overflow-hidden">
+                            <img src="images/powerbi.jpg" alt="Satış Analizi" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Proje 2 -->
+            <div class="grid lg:grid-cols-2 gap-16 items-center fade-in-up">
+                <div class="professional-card p-8 elegant-hover">
+                    <div class="aspect-video bg-gradient-to-br from-gold/20 to-transparent rounded-lg overflow-hidden">
+                        <img src="images/topraksulamakapak.jpg" alt="Toprak Sulama Sistemi" class="w-full h-full object-cover">
+                    </div>
+                </div>
+                <div>
+                    <div class="professional-card p-12 elegant-hover">
+                        <div class="mb-6">
+                            <div class="text-gold text-sm font-semibold tracking-wide uppercase mb-2">IoT Projesi</div>
+                            <h3 class="font-playfair text-3xl font-bold text-white mb-4">Toprak Sulama Sistemi</h3>
+                        </div>
+                        <p class="text-gray-300 text-lg leading-relaxed mb-8">
+                            Bu projenin temel amacı; çocuklara bitki bakımı ve su tüketimi konusunda erken yaşta bilinç kazandırmak, doğa ile bağ kurmalarını sağlamak ve sorumluluk alma becerilerini geliştirmektir.
+                        </p>
+                        <button class="executive-button px-8 py-3 text-black font-semibold tracking-wide"
+                            onclick="openModal(
+                                'Toprak Sulama Sistemi',
+                                'ESP8266, nem sensörü ve mobil uygulama ile geliştirilmiş IoT projesidir.',
+                                ['images/flutter_01.jpg', 'images/topraksulama2.jpg'],
+                                'Üniversite eğitimim süresince edindiğim teorik bilgileri pratiğe dökme fırsatı bulduğum projelerden biri, dönem sonu dersi kapsamında geliştirdiğim Akıllı Toprak Sulama Sistemi projesidir. Bu projede özellikle mobil programlama ve donanım bileşenlerinin kodlanmasıyla ilgilendim. Donanım tarafında nem sensörü ve ESP modülü ile veri toplayarak, bu verileri mobil uygulama üzerinden takip etmeye olanak sağlayan bir sistem geliştirdim.'
+                            )">
+                            DETAYLARI GÖRÜNTÜLE
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Proje 3 -->
+            <div class="grid lg:grid-cols-2 gap-16 items-center fade-in-up">
+                <div class="professional-card p-8 elegant-hover">
+                    <div class="aspect-video bg-gradient-to-br from-gold/20 to-transparent rounded-lg overflow-hidden">
+                        <img src="images/shiny4.jpg" alt="Youtube Sosyal Analizi" class="w-full h-full object-cover">
+                    </div>
+                </div>
+                <div>
+                    <div class="professional-card p-12 elegant-hover">
+                        <div class="mb-6">
+                            <div class="text-gold text-sm font-semibold tracking-wide uppercase mb-2">Veri Madenciliği</div>
+                            <h3 class="font-playfair text-3xl font-bold text-white mb-4">Youtube Sosyal Analizi</h3>
+                        </div>
+                        <p class="text-gray-300 text-lg leading-relaxed mb-8">
+                            Youtube yorumlarını analiz ederek toplumda yaşanılan olaylara tepkilerini gerekli analizlerle ortaya çıkarmaktır.
+                        </p>
+                        <button class="executive-button px-8 py-3 text-black font-semibold tracking-wide"
+                            onclick="openModal(
+                                'Youtube Sosyal Analizi',
+                                'Python ve R ile yapılan duygu analizi, kelime bulutu ve istatistiksel analizleri içerir.',
+                                ['images/shiny1.jpg', 'images/shiny2.jpg'],
+                                'Dönem içerisinde ders kapsamında edindiğim bilgiler ve araştırmalarım sonucunda Youtube üzerinden yorum analizi yaparak bireylerin duygu ve düşüncelerini öğrendiğim proje oldu. Bu projede Python ve R programlama ile gerekli duygu analizleri, kelime bulutları yapılmıştır.'
+                            )">
+                            DETAYLARI GÖRÜNTÜLE
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Proje 4 -->
+            <div class="grid lg:grid-cols-2 gap-16 items-center fade-in-up">
+                <div class="order-2 lg:order-1">
+                    <div class="professional-card p-12 elegant-hover">
+                        <div class="mb-6">
+                            <div class="text-gold text-sm font-semibold tracking-wide uppercase mb-2">R ile Analiz</div>
+                            <h3 class="font-playfair text-3xl font-bold text-white mb-4">Ggplot Doğalgaz Analizi</h3>
+                        </div>
+                        <p class="text-gray-300 text-lg leading-relaxed mb-8">
+                            İstanbul ilçeleri bazında doğalgaz kullanım eğilimlerini R ve ggplot ile analiz edilmesi.
+                        </p>
+                        <button class="executive-button px-8 py-3 text-black font-semibold tracking-wide"
+                            onclick="openModal(
+                                'Ggplot Doğalgaz Analizi',
+                                'R programlama ile ggplot kullanılarak hazırlanan görsel analiz projesi.',
+                                ['images/istanbulrprogramlama.jpg'],
+                                'Bu projenin temel amacı, R da bulunan ggplot kütüphanesini kullanarak İstanbul daki ilçeler bazında doğalgaz kullanım eğilimlerini ve tüketim miktarlarını analiz ederek, kullanım sınıfı, kullanıcı türü ve yıllara göre tüketim değişimlerini görsel ve istatistiksel olarak ortaya koymaktır.')">
+                            DETAYLARI GÖRÜNTÜLE
+                        </button>
+                    </div>
+                </div>
+                <div class="order-1 lg:order-2">
+                    <div class="professional-card p-8 elegant-hover">
+                        <div class="aspect-video bg-gradient-to-br from-gold/20 to-transparent rounded-lg overflow-hidden">
+                            <img src="images/istanbulrprogramlama.jpg" alt="Ggplot Doğalgaz Analizi" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Modal -->
+<div id="projectModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm hidden items-center justify-center z-50">
+    <div class="bg-gray-900 rounded-xl p-8 max-w-2xl w-full relative">
+        <button onclick="closeModal()" class="absolute top-4 right-4 text-white text-2xl">&times;</button>
+        <h3 id="modalTitle" class="text-3xl font-bold text-gold mb-4"></h3>
+        <p id="modalDescription" class="text-gray-300 mb-4"></p>
+
+        <!-- Detaylı metin alanı eklendi -->
+        <div id="modal-long-text" class="text-gray-400 text-sm mb-6 hidden"></div>
+
+        <div id="modalImages" class="flex gap-4 flex-wrap"></div>
+
+        <!-- Detayları Göster butonu -->
+        <button id="detailsButton" 
+                onclick="toggleDetails()" 
+                class="mt-4 bg-gold text-black px-4 py-2 rounded-lg">
+            Detayları Göster
+        </button>
+    </div>
+</div>
+
+<script>
+let detailsVisible = false;
+
+function openModal(title, description, images, longText = '') {
+    document.getElementById('modalTitle').textContent = title;
+    document.getElementById('modalDescription').textContent = description;
+
+    const longTextDiv = document.getElementById('modal-long-text');
+    if (longText) {
+        longTextDiv.innerText = longText;
+        longTextDiv.classList.add('hidden'); // Başta gizli
+    }
+
+    const modalImages = document.getElementById('modalImages');
+    modalImages.innerHTML = '';
+    images.forEach(src => {
+        const img = document.createElement('img');
+        img.src = src;
+        img.className = 'w-48 rounded-lg';
+        modalImages.appendChild(img);
+    });
+
+    document.getElementById('projectModal').classList.remove('hidden');
+    document.getElementById('projectModal').classList.add('flex');
+    detailsVisible = false; // Her açılışta sıfırlansın
+}
+
+function toggleDetails() {
+    const details = document.getElementById('modal-long-text');
+    const button = document.getElementById('detailsButton');
+
+    if (detailsVisible) {
+        details.classList.add('hidden');
+        button.textContent = 'Detayları Göster';
+    } else {
+        details.classList.remove('hidden');
+        button.textContent = 'Detayları Gizle';
+    }
+    detailsVisible = !detailsVisible;
+}
+
+function closeModal() {
+    document.getElementById('projectModal').classList.add('hidden');
+    document.getElementById('projectModal').classList.remove('flex');
+}
+</script>
+
+    <!-- Contact Section -->
+<section id="contact" class="py-32 relative">
+    <div class="max-w-5xl mx-auto px-8">
+        <div class="text-center mb-20 fade-in-up">
+            <h2 class="font-sans text-5xl md:text-6xl font-bold mb-6">
+                <span class="text-gold">İletişim</span> <span class="text-white">Adresi</span>
+            </h2>
+            <div class="mt-16 pt-12 border-t border-gray-700">
+                <div class="flex justify-center">
+                    <div class="flex flex-col items-center text-center">
+                        <div class="w-16 h-16 gold-gradient mx-auto mb-4 flex items-center justify-center text-black text-xl font-bold">
+                            @
+                        </div>
+                        <h3 class="font-semibold text-white mb-2 uppercase tracking-wide">E-posta</h3>
+                        <p class="text-gray-400">c.yurtsrven@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Footer -->
+    <footer class="py-16 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-8 text-center">
+            <div class="mb-8">
+                <h3 class="font-playfair text-3xl font-bold text-gold mb-4">Çağla Yurtseven</h3>
+            </div>
+            <div class="divider-gold w-32 mx-auto mb-8"></div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+                document.getElementById('mobileMenu').classList.add('hidden');
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('glass-dark');
+            } else {
+                navbar.classList.remove('glass-dark');
+            }
+        });
+
+        // Form submission
+        function handleSubmit(event) {
+            event.preventDefault();
+            const button = event.target.querySelector('button[type="submit"]');
+            const originalText = button.innerHTML;
+            
+            button.innerHTML = 'GÖNDERILIYOR...';
+            button.disabled = true;
+            
+            setTimeout(() => {
+                alert('Mesajınız alındı. En kısa sürede size dönüş yapılacaktır.\n\nBu bir demo portfolyo sayfasıdır.');
+                button.innerHTML = originalText;
+                button.disabled = false;
+                event.target.reset();
+            }, 2000);
+        }
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Initialize animations
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.fade-in-up').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9708deba304a4592',t:'MTc1NTQzMDU0Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
